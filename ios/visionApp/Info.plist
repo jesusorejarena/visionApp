@@ -72,5 +72,9 @@
 	<string>$(PRODUCT_NAME) needs access to your Camera.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>$(PRODUCT_NAME) needs access to your Microphone.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs access to your Photo Library Usage.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs access to your Photo Library Add Usage.</string>
 </dict>
 </plist>
