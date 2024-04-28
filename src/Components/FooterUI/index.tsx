@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {TouchableOpacity, View} from 'react-native';
 import IconsUI from '../IconsUI';
 import TypeCamera from './TypeCamera';
+import {useNavigation} from '@react-navigation/native';
 
 function FooterUI({
   switchPositionCamera,
@@ -9,6 +10,8 @@ function FooterUI({
   startRecording,
   stopRecording,
 }: any): React.JSX.Element {
+  const navigation: any = useNavigation();
+
   const [typeCamera, setTypeCamera] = useState<string>('Camera');
   const [recording, setRecording] = useState(false);
 
@@ -50,7 +53,8 @@ function FooterUI({
       <View className="flex flex-row items-center justify-between px-2">
         <View className="w-1/3 items-center">
           {!recording && (
-            <TouchableOpacity onPress={() => console.log('images')}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('GalleryNavigation')}>
               <IconsUI
                 collection="MaterialIcons"
                 icon="image"
