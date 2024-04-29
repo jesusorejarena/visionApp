@@ -517,7 +517,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.visionApp17.com;
+				PRODUCT_BUNDLE_IDENTIFIER = com.visionCameraApp.com.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/visionApp.app/visionApp";
 			};
@@ -542,7 +542,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.visionApp17.com;
+				PRODUCT_BUNDLE_IDENTIFIER = com.visionCameraApp.com.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/visionApp.app/visionApp";
 			};
@@ -558,7 +558,7 @@
 				DEVELOPMENT_TEAM = 4MR3DH5C7R;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = visionApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Vision App";
+				INFOPLIST_KEY_CFBundleDisplayName = "Vision Camera App";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -569,7 +569,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.visionApp17.com;
+				PRODUCT_BUNDLE_IDENTIFIER = com.visionCameraApp.com;
 				PRODUCT_NAME = visionApp;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -586,7 +586,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4MR3DH5C7R;
 				INFOPLIST_FILE = visionApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Vision App";
+				INFOPLIST_KEY_CFBundleDisplayName = "Vision Camera App";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -597,7 +597,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.visionApp17.com;
+				PRODUCT_BUNDLE_IDENTIFIER = com.visionCameraApp.com;
 				PRODUCT_NAME = visionApp;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

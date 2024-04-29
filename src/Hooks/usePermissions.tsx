@@ -1,8 +1,5 @@
-/* eslint-disable curly */
-/* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useEffect} from 'react';
-import {Text} from 'react-native';
 import {
   useCameraPermission,
   useMicrophonePermission,
@@ -28,11 +25,12 @@ const usePermissions = () => {
     }
   }, []);
 
-  if (!hasPermissionCamera)
-    return <Text className="text-xl">HAS PERMISSION</Text>;
-
-  if (!hasPermissionMicrophone)
-    return <Text className="text-xl">HAS PERMISSION</Text>;
+  return {
+    hasPermissionCamera,
+    hasPermissionMicrophone,
+    requestPermissionCamera,
+    requestPermissionMicrophone,
+  };
 };
 
 export default usePermissions;

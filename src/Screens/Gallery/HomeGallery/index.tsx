@@ -24,8 +24,8 @@ function HomeGallery(): React.JSX.Element {
 
   const getPhotos = () => {
     CameraRoll.getPhotos({
-      first: 13,
-      assetType: 'Photos',
+      first: 200,
+      groupTypes: 'All',
     })
       .then(r => {
         setImages({...images, photos: r.edges});

@@ -14,6 +14,7 @@ const useFunctionsCamera = ({device, switchPosition}: any) => {
   const [hdrButton, setHdrButton] = useState(false);
   const [qualityButton, setQualityButton] = useState(0);
   const [selectZoom, setSelectZoom] = useState(zoomOptionsBack[1]);
+  const [typeCamera, setTypeCamera] = useState<string>('Camera');
 
   const {savePhotoOrVideo} = usePhotoLibrary();
 
@@ -45,7 +46,7 @@ const useFunctionsCamera = ({device, switchPosition}: any) => {
 
       console.log('Start recording...');
 
-      let bitRate = resolutionsOptions[qualityButton].value;
+      let bitRate = 1024 * resolutionsOptions[qualityButton].value;
       bitRate = (bitRate / 30) * (fpsButton ? 60 : 30);
       if (hdrButton === true) bitRate *= 1.2; // 10-Bit Video HDR
       bitRate *= 0.8; // H.265
@@ -130,6 +131,8 @@ const useFunctionsCamera = ({device, switchPosition}: any) => {
     changeQuality,
     selectZoom,
     changeZoom,
+    typeCamera,
+    setTypeCamera,
   };
 };
 

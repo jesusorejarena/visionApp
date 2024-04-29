@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>visionApp</string>
+	<string>Vision Camera App</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
+	<string>Vision Camera App</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -31,8 +31,17 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs access to your Camera.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string><key>UIAppFonts</key>
+	<string></string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs access to your Microphone.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs access to your Photo Library Add Usage.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs access to your Photo Library Usage.</string>
+	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
 		<string>Entypo.ttf</string>
@@ -68,13 +77,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSCameraUsageDescription</key>
-	<string>$(PRODUCT_NAME) needs access to your Camera.</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>$(PRODUCT_NAME) needs access to your Microphone.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>$(PRODUCT_NAME) needs access to your Photo Library Usage.</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>$(PRODUCT_NAME) needs access to your Photo Library Add Usage.</string>
 </dict>
 </plist>

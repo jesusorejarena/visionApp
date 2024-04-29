@@ -17,10 +17,10 @@ function FooterUI({
   selectZoom,
   changeZoom,
   setIsActive,
+  typeCamera,
+  setTypeCamera,
 }: any): React.JSX.Element {
   const navigation: any = useNavigation();
-
-  const [typeCamera, setTypeCamera] = useState<string>('Camera');
   const [recording, setRecording] = useState(false);
   const [images, setImages] = useState<any>({photos: []});
 
@@ -37,8 +37,14 @@ function FooterUI({
   };
 
   const onPressTypeCamera: any = {
-    Camera: () => takePhoto(),
-    Video: () => onPressRecording(),
+    Camera: () => {
+      takePhoto();
+      setTimeout(() => getPhotos(), 300);
+    },
+    Video: () => {
+      onPressRecording();
+      setTimeout(() => getPhotos(), 300);
+    },
   };
 
   const stylesButton: any = {
@@ -51,10 +57,10 @@ function FooterUI({
   const getPhotos = () => {
     CameraRoll.getPhotos({
       first: 3,
-      assetType: 'Photos',
+      groupTypes: 'All',
     })
       .then(r => {
-        setImages({...images, photos: r.edges});
+        setImages({...images, photos: r.edges.reverse()});
       })
       .catch(err => {
         console.log(err);
@@ -66,11 +72,9 @@ function FooterUI({
     getPhotos();
   }, []);
 
-  console.log(images.photos);
-
   return (
     <View className="absolute bottom-0 w-full z-10 mb-10">
-      <View className="mb-2">
+      <View className={recording ? 'mb-6' : 'mb-2'}>
         <TypeZoom
           selectZoom={selectZoom}
           changeZoom={changeZoom}
@@ -83,36 +87,33 @@ function FooterUI({
       </View>
 
       <View className="flex flex-row items-center justify-between px-2">
-        <View className="w-1/3 items-center ">
-          <View className="flex flex-row justify-center items-center bg-white bottom-7 left-7">
+        <View className="w-1/3 items-center">
+          <View className="flex flex-row justify-center items-center bottom-7 left-7">
             {!recording && (
               <TouchableOpacity
-                className=""
                 onPress={() => {
                   setIsActive(false);
                   navigation.navigate('GalleryNavigation');
                 }}>
-                {images.photos.map((item: any, index: number) => (
-                  <View
-                    key={index}
-                    className={`bg-white border-2 border-white rounded-lg shadow-md absolute overflow-hidden ${positionLastImages[index]}`}>
-                    <Image
-                      className="w-full h-full rounded-lg"
-                      source={{uri: item.node.image.uri}}
-                    />
-                  </View>
-                ))}
+                <View className="relative">
+                  {images.photos.map((item: any, index: number) => (
+                    <View
+                      key={index}
+                      className={`h-[60px] w-[40px] bg-white border-2 border-white rounded-lg shadow-md absolute ${positionLastImages[index]}`}>
+                      <Image
+                        className="w-full h-full rounded-lg"
+                        source={{uri: item.node.image.uri}}
+                      />
+                    </View>
+                  ))}
+                </View>
               </TouchableOpacity>
             )}
           </View>
         </View>
 
         <View className="w-1/3 items-center">
-          <TouchableOpacity
-            onPress={() => {
-              onPressTypeCamera[typeCamera];
-              getPhotos();
-            }}>
+          <TouchableOpacity onPress={onPressTypeCamera[typeCamera]}>
             <View className="rounded-full z-10 h-20 w-20 bg-gray-300 flex flex-col justify-center items-center">
               <View className={`z-20 ${stylesButton[typeCamera]}`} />
             </View>

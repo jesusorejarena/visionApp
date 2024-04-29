@@ -14,6 +14,8 @@ function HeaderUI({
   changeHdr,
   qualityButton,
   changeQuality,
+  typeCamera,
+  switchPosition,
 }: any): React.JSX.Element {
   return (
     <View className="p-3 bg-black/50 z-10 flex flex-row items-center justify-between gap-5">
@@ -35,32 +37,38 @@ function HeaderUI({
         />
       </TouchableOpacity>
 
-      <TouchableOpacity className="p-1" onPress={changeFps}>
-        <IconsUI
-          collection="MaterialIcons"
-          icon={fpsButton ? '60fps' : '30fps'}
-          size="28"
-          color="#fff"
-        />
-      </TouchableOpacity>
+      {typeCamera === 'Video' && (
+        <TouchableOpacity className="p-1" onPress={changeFps}>
+          <IconsUI
+            collection="MaterialIcons"
+            icon={fpsButton ? '60fps' : '30fps'}
+            size="28"
+            color="#fff"
+          />
+        </TouchableOpacity>
+      )}
 
-      <TouchableOpacity className="p-1" onPress={changeFlash}>
-        <IconsUI
-          collection="MaterialIcons"
-          icon={`flash-${flashOptions[flashButton]}`}
-          size="28"
-          color="#fff"
-        />
-      </TouchableOpacity>
+      {switchPosition === 'back' && (
+        <TouchableOpacity className="p-1" onPress={changeFlash}>
+          <IconsUI
+            collection="MaterialIcons"
+            icon={`flash-${flashOptions[flashButton]}`}
+            size="28"
+            color="#fff"
+          />
+        </TouchableOpacity>
+      )}
 
-      <TouchableOpacity className="p-1" onPress={changeVolume}>
-        <IconsUI
-          collection="MaterialIcons"
-          icon={volumeButton ? 'volume-up' : 'volume-mute'}
-          size="28"
-          color="#fff"
-        />
-      </TouchableOpacity>
+      {typeCamera === 'Video' && (
+        <TouchableOpacity className="p-1" onPress={changeVolume}>
+          <IconsUI
+            collection="MaterialIcons"
+            icon={volumeButton ? 'volume-up' : 'volume-mute'}
+            size="28"
+            color="#fff"
+          />
+        </TouchableOpacity>
+      )}
     </View>
   );
 }

@@ -14,12 +14,9 @@ function Camera(): React.JSX.Element {
   const [isActive, setIsActive] = useState(false);
 
   usePermissions();
+
   const {device, switchPositionCamera, switchPosition}: any =
     useCameraPosition();
-
-  useEffect(() => {
-    setIsActive(isFocused);
-  }, [isFocused]);
 
   const {
     format,
@@ -39,8 +36,13 @@ function Camera(): React.JSX.Element {
     changeQuality,
     selectZoom,
     changeZoom,
+    typeCamera,
+    setTypeCamera,
   } = useFunctionsCamera({device, switchPosition});
 
+  useEffect(() => {
+    setIsActive(isFocused);
+  }, [isFocused]);
   return (
     <View className="flex-1">
       <HeaderUI
@@ -54,6 +56,8 @@ function Camera(): React.JSX.Element {
         changeHdr={changeHdr}
         qualityButton={qualityButton}
         changeQuality={changeQuality}
+        typeCamera={typeCamera}
+        switchPosition={switchPosition}
       />
 
       <CameraUI
@@ -67,7 +71,7 @@ function Camera(): React.JSX.Element {
         format={format}
         videoHdr={format.supportsVideoHdr}
         photoHdr={format.supportsPhotoHdr}
-        enableZoomGesture={true}
+        // enableZoomGesture={true}
         zoom={selectZoom.value}
       />
 
@@ -80,6 +84,8 @@ function Camera(): React.JSX.Element {
         selectZoom={selectZoom}
         changeZoom={changeZoom}
         setIsActive={setIsActive}
+        typeCamera={typeCamera}
+        setTypeCamera={setTypeCamera}
       />
     </View>
   );
