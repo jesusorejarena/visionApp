@@ -9,6 +9,9 @@ const windowWidth = Dimensions.get('window').width;
 
 const useGallery = () => {
   const scrollX = new Animated.Value(0);
+  scrollX.addListener(() => {
+    return;
+  });
 
   const {top} = useSafeAreaInsets();
   const {setParams, goBack} = useNavigation();
@@ -78,8 +81,6 @@ const useGallery = () => {
   };
 
   const scrollToItem = (index: number) => {
-    console.log(flatListRef);
-
     flatListRef.current &&
       flatListRef.current.scrollToIndex({
         index: index,

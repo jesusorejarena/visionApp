@@ -1,8 +1,9 @@
 /* eslint-disable curly */
-import {useCallback, useRef, useState} from 'react';
+import {useCallback, useEffect, useRef, useState} from 'react';
 import {Camera, useCameraFormat} from 'react-native-vision-camera';
-import {flashOptions, resolutionsOptions} from '../Utils';
+import {flashOptions, resolutionsOptions, zoomOptionsBack} from '../Utils';
 import usePhotoLibrary from './usePhotoLibrary';
+import {zoomOptionsProps} from '../Types/components';
 
 const useFunctionsCamera = ({device, switchPosition}: any) => {
   const camera = useRef<Camera>(null);
@@ -12,6 +13,7 @@ const useFunctionsCamera = ({device, switchPosition}: any) => {
   const [fpsButton, setFpsButton] = useState(true);
   const [hdrButton, setHdrButton] = useState(false);
   const [qualityButton, setQualityButton] = useState(0);
+  const [selectZoom, setSelectZoom] = useState(zoomOptionsBack[1]);
 
   const {savePhotoOrVideo} = usePhotoLibrary();
 
@@ -102,6 +104,14 @@ const useFunctionsCamera = ({device, switchPosition}: any) => {
       qualityButton >= resolutionsOptions.length - 1 ? 0 : qualityButton + 1,
     );
 
+  const changeZoom = (zoom: zoomOptionsProps) => {
+    setSelectZoom(zoom);
+  };
+
+  useEffect(() => {
+    setSelectZoom(zoomOptionsBack[1]);
+  }, [switchPosition]);
+
   return {
     format,
     camera,
@@ -118,6 +128,8 @@ const useFunctionsCamera = ({device, switchPosition}: any) => {
     changeHdr,
     qualityButton,
     changeQuality,
+    selectZoom,
+    changeZoom,
   };
 };
 

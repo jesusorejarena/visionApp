@@ -7,7 +7,18 @@ function GalleryNavigation(): React.JSX.Element {
   const Stack = createStackNavigator();
 
   return (
-    <Stack.Navigator initialRouteName="HomeGallery">
+    <Stack.Navigator
+      initialRouteName="HomeGallery"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#000',
+          borderWidth: 0,
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}>
       <Stack.Screen
         name="HomeGallery"
         component={HomeGallery}

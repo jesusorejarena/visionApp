@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 import {useEffect, useState} from 'react';
+import usePermissions from '../../../Hooks/usePermissions';
 
 const {height} = Dimensions.get('window');
 
@@ -18,6 +19,8 @@ function HomeGallery(): React.JSX.Element {
   const {navigate}: any = useNavigation();
 
   const [images, setImages] = useState<any>({photos: []});
+
+  usePermissions();
 
   const getPhotos = () => {
     CameraRoll.getPhotos({

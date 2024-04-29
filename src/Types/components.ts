@@ -10,5 +10,10 @@ export interface resolutionsOptionsProps {
   value: number;
   icon: string;
 }
+export interface zoomOptionsProps {
+  id: number;
+  label: string;
+  value: number;
+}
 
 export type flashOptionsProps = 'off' | 'on' | 'auto';

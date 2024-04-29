@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Camera as CameraUI} from 'react-native-vision-camera';
 import usePermissions from '../../Hooks/usePermissions';
@@ -6,17 +6,20 @@ import useCameraPosition from '../../Hooks/useCameraPosition';
 import useFunctionsCamera from '../../Hooks/useFunctionsCamera';
 import HeaderUI from '../../Components/HeaderUI';
 import FooterUI from '../../Components/FooterUI';
+import {useIsFocused} from '@react-navigation/native';
 
 function Camera(): React.JSX.Element {
-  // Este codigo sirve para cuando se va a la ventana de imagenes
-  /* const isFocused = useIsFocused();
-  const appState = useAppState();
-  const isActive = isFocused && appState === 'active'; */
+  const isFocused = useIsFocused();
+
+  const [isActive, setIsActive] = useState(false);
 
   usePermissions();
-
   const {device, switchPositionCamera, switchPosition}: any =
     useCameraPosition();
+
+  useEffect(() => {
+    setIsActive(isFocused);
+  }, [isFocused]);
 
   const {
     format,
@@ -34,6 +37,8 @@ function Camera(): React.JSX.Element {
     changeHdr,
     qualityButton,
     changeQuality,
+    selectZoom,
+    changeZoom,
   } = useFunctionsCamera({device, switchPosition});
 
   return (
@@ -55,20 +60,26 @@ function Camera(): React.JSX.Element {
         ref={camera}
         style={StyleSheet.absoluteFill}
         device={device}
-        isActive={true}
+        isActive={isActive}
         photo={true}
         video={true}
         audio={volumeButton}
         format={format}
         videoHdr={format.supportsVideoHdr}
         photoHdr={format.supportsPhotoHdr}
+        enableZoomGesture={true}
+        zoom={selectZoom.value}
       />
 
       <FooterUI
+        switchPosition={switchPosition}
         switchPositionCamera={switchPositionCamera}
         takePhoto={takePhoto}
         startRecording={startRecording}
         stopRecording={stopRecording}
+        selectZoom={selectZoom}
+        changeZoom={changeZoom}
+        setIsActive={setIsActive}
       />
     </View>
   );

@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useState} from 'react';
 import {Animated, Dimensions, View} from 'react-native';
 import ButtonPills from './ButtonPills';
 
@@ -8,11 +8,15 @@ const windowWidth = Dimensions.get('window').width;
 const data = [
   {id: 0, label: 'Camera'},
   {id: 1, label: 'Video'},
-  {id: 2, label: 'Panoramica'},
 ];
 
 function TypeCamera({typePosition}: any): React.JSX.Element {
+  const [select, setSelect] = useState<any>(data[0]);
+
   const scrollX = new Animated.Value(0);
+  scrollX.addListener(() => {
+    return;
+  });
 
   const totalItemWidth = windowWidth / 3;
   const additionalSpace = windowWidth - totalItemWidth;
@@ -21,7 +25,10 @@ function TypeCamera({typePosition}: any): React.JSX.Element {
     const {x} = event.nativeEvent.contentOffset;
     const roundedX = Math.round(x / totalItemWidth);
 
-    typePosition(data.find(p => p.id === roundedX)?.label);
+    const response = data.find(p => p.id === roundedX);
+
+    typePosition(response?.label);
+    setSelect(response);
 
     return Animated.event([{nativeEvent: {contentOffset: {x: scrollX}}}], {
       useNativeDriver: true,
@@ -42,7 +49,7 @@ function TypeCamera({typePosition}: any): React.JSX.Element {
               marginLeft: index === 0 ? additionalSpace / 2 : 0,
               marginRight: index === data.length - 1 ? additionalSpace / 2 : 0,
             }}>
-            <ButtonPills title={item.label} />
+            <ButtonPills item={item} select={select} />
           </View>
         );
       }}
