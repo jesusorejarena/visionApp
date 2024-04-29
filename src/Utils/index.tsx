@@ -27,8 +27,26 @@ export const zoomOptionsFront: zoomOptionsProps[] = [
   {id: 1, label: '1x', value: 1.5},
 ];
 
-export const positionLastImages: any = [
-  '-top-[2px] left-[24px] transform rotate-[38deg] bg-red-500',
-  '-top-[1px] left-[12px] transform rotate-[20deg] bg-green-500',
-  'top-[4px] bg-yellow-500',
-];
+export const positionLastImages: any = {
+  '0': {
+    position: {
+      left: 24,
+      top: -2,
+    },
+    rotate: '38deg',
+  },
+  '1': {
+    position: {
+      left: 12,
+      top: -1,
+    },
+    rotate: '20deg',
+  },
+  '2': {
+    position: {
+      left: 4,
+      top: 0,
+    },
+    rotate: '0deg',
+  },
+};

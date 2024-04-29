@@ -100,7 +100,12 @@ function FooterUI({
                   {images.photos.map((item: any, index: number) => (
                     <View
                       key={index}
-                      className={`h-[60px] w-[40px] bg-white border-2 border-white rounded-lg shadow-md absolute ${positionLastImages[index]}`}>
+                      className="h-[60px] w-[40px] bg-white border-2 border-white rounded-lg shadow-md absolute"
+                      style={{
+                        left: positionLastImages[index].position.left,
+                        top: positionLastImages[index].position.top,
+                        transform: [{rotate: positionLastImages[index].rotate}],
+                      }}>
                       <Image
                         className="w-full h-full rounded-lg"
                         source={{uri: item.node.image.uri}}
