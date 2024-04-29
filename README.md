@@ -64,6 +64,8 @@ npm run ios
 
 Es importante tener en cuenta que este proyecto no es compatible con dispositivos Android debido a problemas de compatibilidad con la librería **react-native-vision-camera**. Esta versión de la libreria a ser relativamente nueva, ha presentado dificultades para compilar en entornos Android.
 
+También, la implementación de una mejor interfaz de visualización de videos quedó pendiente debido a restricciones de tiempo.
+
 # Contacto
 
 Este README proporciona una descripción detallada del proyecto, así como instrucciones claras para su ejecución. Si tienes alguna pregunta o necesitas ayuda adicional, no dudes en contactarme.
