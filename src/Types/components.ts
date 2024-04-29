@@ -36,7 +36,7 @@ export interface FooterUIProps {
   changeZoom: (zoom: ZoomOptionsProps) => void;
   setIsActive: (isActive: boolean) => void;
   typeCamera: CameraType;
-  setTypeCamera: (typeCamera: CameraType) => void;
+  setTypeCamera: (typeCamera: any) => void;
   recording: boolean;
   setRecording: (recording: boolean) => void;
 }
