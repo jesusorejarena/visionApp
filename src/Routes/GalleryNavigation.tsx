@@ -7,21 +7,16 @@ function GalleryNavigation(): React.JSX.Element {
   const Stack = createStackNavigator();
 
   return (
-    <Stack.Navigator
-      initialRouteName="HomeGallery"
-      screenOptions={{
-        headerShown: false,
-        // animationEnabled: false,
-      }}>
+    <Stack.Navigator initialRouteName="HomeGallery">
       <Stack.Screen
         name="HomeGallery"
         component={HomeGallery}
-        options={{title: 'HomeGallery'}}
+        options={{title: 'Gallery'}}
       />
       <Stack.Screen
         name="PhotoGallery"
         component={PhotoGallery}
-        options={{title: 'PhotoGallery'}}
+        options={{title: 'PhotoGallery', headerShown: false}}
       />
     </Stack.Navigator>
   );

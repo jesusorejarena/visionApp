@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import Home from '../Screens/Home';
+import Camera from '../Screens/Camera';
 import GalleryNavigation from './GalleryNavigation';
 
 function Navigation(): React.JSX.Element {
@@ -8,16 +8,17 @@ function Navigation(): React.JSX.Element {
 
   return (
     <Stack.Navigator
-      initialRouteName="GalleryNavigation"
-      screenOptions={{
-        headerShown: false,
-        // animationEnabled: false,
-      }}>
-      <Stack.Screen name="Home" component={Home} options={{title: 'Home'}} />
+      initialRouteName="Camera"
+      screenOptions={{headerShown: false}}>
+      <Stack.Screen
+        name="Camera"
+        component={Camera}
+        options={{title: 'Camera'}}
+      />
       <Stack.Screen
         name="GalleryNavigation"
         component={GalleryNavigation}
-        options={{title: 'GalleryNavigation'}}
+        options={{title: 'Gallery'}}
       />
     </Stack.Navigator>
   );

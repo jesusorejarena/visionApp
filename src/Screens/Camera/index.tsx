@@ -1,13 +1,13 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {Camera} from 'react-native-vision-camera';
+import {Camera as CameraUI} from 'react-native-vision-camera';
 import usePermissions from '../../Hooks/usePermissions';
 import useCameraPosition from '../../Hooks/useCameraPosition';
-import HeaderUI from '../HeaderUI';
-import FooterUI from '../FooterUI';
 import useFunctionsCamera from '../../Hooks/useFunctionsCamera';
+import HeaderUI from '../../Components/HeaderUI';
+import FooterUI from '../../Components/FooterUI';
 
-function CameraUI(): React.JSX.Element {
+function Camera(): React.JSX.Element {
   // Este codigo sirve para cuando se va a la ventana de imagenes
   /* const isFocused = useIsFocused();
   const appState = useAppState();
@@ -51,7 +51,7 @@ function CameraUI(): React.JSX.Element {
         changeQuality={changeQuality}
       />
 
-      <Camera
+      <CameraUI
         ref={camera}
         style={StyleSheet.absoluteFill}
         device={device}
@@ -74,4 +74,4 @@ function CameraUI(): React.JSX.Element {
   );
 }
 
-export default CameraUI;
+export default Camera;

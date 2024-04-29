@@ -3,6 +3,7 @@ import {TouchableOpacity, View} from 'react-native';
 import IconsUI from '../IconsUI';
 import TypeCamera from './TypeCamera';
 import {useNavigation} from '@react-navigation/native';
+import TypeZoom from './TypeZoom';
 
 function FooterUI({
   switchPositionCamera,
@@ -13,6 +14,7 @@ function FooterUI({
   const navigation: any = useNavigation();
 
   const [typeCamera, setTypeCamera] = useState<string>('Camera');
+  const [typeZoom, setTypeZoom] = useState<string>('1x');
   const [recording, setRecording] = useState(false);
 
   const onPressRecording = () => {
@@ -42,13 +44,13 @@ function FooterUI({
 
   return (
     <View className="absolute bottom-0 w-full z-10 mb-10">
-      {!recording && (
-        <View className="mb-2">
-          <TypeCamera
-            typeCameraPosition={(type: string) => setTypeCamera(type)}
-          />
-        </View>
-      )}
+      <View className="mb-2">
+        <TypeZoom typePosition={(type: string) => setTypeZoom(type)} />
+      </View>
+
+      <View className={`mb-2 ${recording && 'hidden'}`}>
+        <TypeCamera typePosition={(type: string) => setTypeCamera(type)} />
+      </View>
 
       <View className="flex flex-row items-center justify-between px-2">
         <View className="w-1/3 items-center">

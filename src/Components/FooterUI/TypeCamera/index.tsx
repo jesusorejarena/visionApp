@@ -11,7 +11,7 @@ const data = [
   {id: 2, label: 'Panoramica'},
 ];
 
-function TypeCamera({typeCameraPosition}: any): React.JSX.Element {
+function TypeCamera({typePosition}: any): React.JSX.Element {
   const scrollX = new Animated.Value(0);
 
   const totalItemWidth = windowWidth / 3;
@@ -21,7 +21,7 @@ function TypeCamera({typeCameraPosition}: any): React.JSX.Element {
     const {x} = event.nativeEvent.contentOffset;
     const roundedX = Math.round(x / totalItemWidth);
 
-    typeCameraPosition(data.find(p => p.id === roundedX)?.label);
+    typePosition(data.find(p => p.id === roundedX)?.label);
 
     return Animated.event([{nativeEvent: {contentOffset: {x: scrollX}}}], {
       useNativeDriver: true,
