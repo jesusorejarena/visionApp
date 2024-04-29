@@ -12,13 +12,14 @@ import {
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 import {useEffect, useState} from 'react';
 import usePermissions from '../../../Hooks/usePermissions';
+import {GetImagesProps} from '../../../Types/components';
 
 const {height} = Dimensions.get('window');
 
 function HomeGallery(): React.JSX.Element {
   const {navigate}: any = useNavigation();
 
-  const [images, setImages] = useState<any>({photos: []});
+  const [images, setImages] = useState<GetImagesProps>({photos: []});
 
   usePermissions();
 
@@ -40,7 +41,7 @@ function HomeGallery(): React.JSX.Element {
     getPhotos();
   }, []);
 
-  const renderItem = ({item, index}: any) => (
+  const renderItem = ({item, index}: {item: any; index: number}) => (
     <TouchableWithoutFeedback
       className="flex-1"
       key={index}

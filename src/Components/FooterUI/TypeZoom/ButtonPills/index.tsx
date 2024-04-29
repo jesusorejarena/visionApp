@@ -1,7 +1,8 @@
 import React from 'react';
 import {Text, View} from 'react-native';
+import {ButtonPillsProps} from '../../../../Types/components';
 
-function ButtonPills({item, select}: any): React.JSX.Element {
+function ButtonPills({item, select}: ButtonPillsProps): React.JSX.Element {
   return (
     <View
       className={`${

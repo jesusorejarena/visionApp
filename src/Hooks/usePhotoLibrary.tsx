@@ -1,7 +1,8 @@
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
+import {SavePhotoOrVideoType} from '../Types/components';
 
 const usePhotoLibrary = () => {
-  const savePhotoOrVideo = async (roll: any, type: any) => {
+  const savePhotoOrVideo = async (roll: any, type: SavePhotoOrVideoType) => {
     try {
       const file = await roll;
 

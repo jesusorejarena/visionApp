@@ -2,6 +2,7 @@ import React from 'react';
 import {TouchableOpacity, View} from 'react-native';
 import IconsUI from '../IconsUI';
 import {flashOptions, resolutionsOptions} from '../../Utils';
+import {HeaderUIProps} from '../../Types/components';
 
 function HeaderUI({
   flashButton,
@@ -17,7 +18,7 @@ function HeaderUI({
   typeCamera,
   switchPosition,
   recording,
-}: any): React.JSX.Element {
+}: HeaderUIProps): React.JSX.Element {
   return (
     <View
       className={`p-3 bg-black/50 z-10 flex flex-row items-center justify-between gap-5 ${

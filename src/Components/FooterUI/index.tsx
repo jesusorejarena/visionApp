@@ -7,6 +7,12 @@ import {useNavigation} from '@react-navigation/native';
 import TypeZoom from './TypeZoom';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 import {positionLastImages} from '../../Utils';
+import {
+  FooterUIProps,
+  GetImagesProps,
+  OnPressTypeCamera,
+  StylesButtonProps,
+} from '../../Types/components';
 
 function FooterUI({
   switchPosition,
@@ -21,9 +27,9 @@ function FooterUI({
   setTypeCamera,
   recording,
   setRecording,
-}: any): React.JSX.Element {
+}: FooterUIProps): React.JSX.Element {
   const navigation: any = useNavigation();
-  const [images, setImages] = useState<any>({photos: []});
+  const [images, setImages] = useState<GetImagesProps>({photos: []});
 
   const onPressRecording = () => {
     if (typeCamera === 'Video') {
@@ -37,7 +43,7 @@ function FooterUI({
     }
   };
 
-  const onPressTypeCamera: any = {
+  const onPressTypeCamera: OnPressTypeCamera = {
     Camera: () => {
       takePhoto();
       setTimeout(() => getPhotos(), 300);
@@ -48,7 +54,7 @@ function FooterUI({
     },
   };
 
-  const stylesButton: any = {
+  const stylesButton: StylesButtonProps = {
     Camera: 'rounded-full h-16 w-16 bg-white',
     Video: `bg-red-500 ${
       recording ? 'rounded-lg h-10 w-10' : 'rounded-full h-16 w-16'

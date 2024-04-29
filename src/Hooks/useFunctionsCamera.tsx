@@ -3,9 +3,16 @@ import {useCallback, useEffect, useRef, useState} from 'react';
 import {Camera, useCameraFormat} from 'react-native-vision-camera';
 import {flashOptions, resolutionsOptions, zoomOptionsBack} from '../Utils';
 import usePhotoLibrary from './usePhotoLibrary';
-import {zoomOptionsProps} from '../Types/components';
+import {
+  CameraType,
+  UseFunctionsCameraProps,
+  ZoomOptionsProps,
+} from '../Types/components';
 
-const useFunctionsCamera = ({device, switchPosition}: any) => {
+const useFunctionsCamera = ({
+  device,
+  switchPosition,
+}: UseFunctionsCameraProps) => {
   const camera = useRef<Camera>(null);
 
   const [flashButton, setFlashButton] = useState(0);
@@ -14,7 +21,7 @@ const useFunctionsCamera = ({device, switchPosition}: any) => {
   const [hdrButton, setHdrButton] = useState(false);
   const [qualityButton, setQualityButton] = useState(0);
   const [selectZoom, setSelectZoom] = useState(zoomOptionsBack[1]);
-  const [typeCamera, setTypeCamera] = useState<string>('Camera');
+  const [typeCamera, setTypeCamera] = useState<CameraType>('Camera');
   const [recording, setRecording] = useState(false);
 
   const {savePhotoOrVideo} = usePhotoLibrary();
@@ -106,7 +113,7 @@ const useFunctionsCamera = ({device, switchPosition}: any) => {
       qualityButton >= resolutionsOptions.length - 1 ? 0 : qualityButton + 1,
     );
 
-  const changeZoom = (zoom: zoomOptionsProps) => {
+  const changeZoom = (zoom: ZoomOptionsProps) => {
     setSelectZoom(zoom);
   };
 
