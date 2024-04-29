@@ -38,6 +38,8 @@ function Camera(): React.JSX.Element {
     changeZoom,
     typeCamera,
     setTypeCamera,
+    recording,
+    setRecording,
   } = useFunctionsCamera({device, switchPosition});
 
   useEffect(() => {
@@ -58,6 +60,7 @@ function Camera(): React.JSX.Element {
         changeQuality={changeQuality}
         typeCamera={typeCamera}
         switchPosition={switchPosition}
+        recording={recording}
       />
 
       <CameraUI
@@ -86,6 +89,8 @@ function Camera(): React.JSX.Element {
         setIsActive={setIsActive}
         typeCamera={typeCamera}
         setTypeCamera={setTypeCamera}
+        recording={recording}
+        setRecording={setRecording}
       />
     </View>
   );

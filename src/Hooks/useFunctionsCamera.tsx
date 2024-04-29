@@ -15,6 +15,7 @@ const useFunctionsCamera = ({device, switchPosition}: any) => {
   const [qualityButton, setQualityButton] = useState(0);
   const [selectZoom, setSelectZoom] = useState(zoomOptionsBack[1]);
   const [typeCamera, setTypeCamera] = useState<string>('Camera');
+  const [recording, setRecording] = useState(false);
 
   const {savePhotoOrVideo} = usePhotoLibrary();
 
@@ -133,6 +134,8 @@ const useFunctionsCamera = ({device, switchPosition}: any) => {
     changeZoom,
     typeCamera,
     setTypeCamera,
+    recording,
+    setRecording,
   };
 };
 

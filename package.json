@@ -6,7 +6,10 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "pods": "cd ios && bundle install && bundle exec pod install",
+    "pods-intel": "cd ios && pod install",
     "m-clean": "npm cache clean --force && watchman watch-del-all && cd android && ./gradlew clean",
+    "install-all": "npm i && npm run pods && npm run m-clean",
+    "install-all-intel": "npm i && npm run pods-intel && npm run m-clean",
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest"

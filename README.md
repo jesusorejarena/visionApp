@@ -1,79 +1,74 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
-
 # Getting Started
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Descripción del Proyecto
 
-## Step 1: Start the Metro Server
+Este proyecto ha sido desarrollado utilizando **React Native** con la base de **react-native-vision-camera**. Se ha integrado el paquete **@react-native-camera-roll/camera-roll** para el almacenamiento y la lectura de imágenes. Para una gestión eficiente de la galería de imágenes, se ha incorporado el paquete **react-native-awesome-gallery**.
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+En cuanto a los estilos, se ha utilizado **nativewind**, una herramienta que facilita la implementación de **Tailwind CSS** en aplicaciones React Native. Los iconos y las animaciones se han diseñado con **lottie-react-native**, **react-native-svg**, y **react-native-vector-icons**.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+El proyecto también aprovecha diversas librerías para el manejo de gestos y animaciones, como **react-native-reanimated** y **react-native-gesture-handler**. Para la navegación entre pantallas, se ha empleado **@react-navigation**.
+
+## Instalación del proyecto
+
+Antes de ejecutar el proyecto es necesario ejecutar este comando:
+
+Ejecutar con procesadores Apple Silicon
 
 ```bash
-# using npm
-npm start
-
-# OR using Yarn
-yarn start
+npm run install-all
 ```
 
-## Step 2: Start your Application
-
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
+Ejecutar con procesadores Intel (Experimental) ya que no poseo dicho procesador
 
 ```bash
-# using npm
-npm run android
-
-# OR using Yarn
-yarn android
+npm run install-all-intel
 ```
 
-### For iOS
+Este comando está configurado para realizar una serie de acciones internas:
+
+1. `npm i`: Instala los paquetes necesarios.
+2. `npm run pods-intel`: Instala los Pods necesarios para el proyecto (solo para iOS) Ejecutar con procesadores **Intel**.
+3. `npm run m-clean`: Limpia el caché del proyecto.
+
+## Ejecución del Proyecto
+
+Para ejecutar el proyecto, se proporciona la opción de utilizar el comando.
 
 ```bash
-# using npm
 npm run ios
-
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+## Características y Funcionalidades
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+- **Splashscreen:** El proyecto cuenta con un splashscreen que muestra la versión, nombre y una animación de carga.
+- **Permisos:** Verifica y solicita permisos de la cámara al iniciar. En caso de rechazo, redirecciona a la pantalla de permisos en la configuración del teléfono (si no se aceptan los permisos **permanecera en esta pantall** o de lo contrario pasara a la **pantalla camara**).
+- **Cámara:**
+  - Posibilidad de tomar fotos y videos.
+  - Zoom y gran angular.
+  - Cámara frontal y trasera.
+  - Preview de imágenes anteriores.
+  - Posibilidad de grabar videos con cambio de cámara.
+  - Configuraciones en fotos y videos para resolución, HDR, FPS y activación de micrófono/flash.
+- **Galería:**
+  - Menú de navegación para regresar a la pantalla de cámara.
+  - Vista previa de hasta 200 imágenes.
+- **Visualización de la Imagen:**
+  - Zoom con doble toque.
+  - Deslizar miniaturas con el carrusel.
+  - Selección de miniatura para cambiar la imagen principal.
+  - Cambio de imagen deslizando la imagen principal.
+  - Ocultar mini carrusel y cantidad de imágenes con un toque.
+  - Salir con gesto de swipe hacia abajo o pellizco.
 
-## Step 3: Modifying your App
+## Limitaciones y Fallas
 
-Now that you have successfully run the app, let's modify it.
+Es importante tener en cuenta que este proyecto no es compatible con dispositivos Android debido a problemas de compatibilidad con la librería **react-native-vision-camera**. Esta versión de la libreria a ser relativamente nueva, ha presentado dificultades para compilar en entornos Android.
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+# Contacto
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+Este README proporciona una descripción detallada del proyecto, así como instrucciones claras para su ejecución. Si tienes alguna pregunta o necesitas ayuda adicional, no dudes en contactarme.
 
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- [LinkedIn](https://www.linkedin.com/in/jesusorejarena/)
+- [Upwork](https://www.upwork.com/freelancers/~0186f09c7907b56b50)
+- [Portfolio](https://www.jesusorejarena.dev/)
+- [GitHub](https://github.com/jesusorejarena)

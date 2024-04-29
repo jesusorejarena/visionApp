@@ -19,9 +19,10 @@ function FooterUI({
   setIsActive,
   typeCamera,
   setTypeCamera,
+  recording,
+  setRecording,
 }: any): React.JSX.Element {
   const navigation: any = useNavigation();
-  const [recording, setRecording] = useState(false);
   const [images, setImages] = useState<any>({photos: []});
 
   const onPressRecording = () => {

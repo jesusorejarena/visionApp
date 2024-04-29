@@ -16,9 +16,13 @@ function HeaderUI({
   changeQuality,
   typeCamera,
   switchPosition,
+  recording,
 }: any): React.JSX.Element {
   return (
-    <View className="p-3 bg-black/50 z-10 flex flex-row items-center justify-between gap-5">
+    <View
+      className={`p-3 bg-black/50 z-10 flex flex-row items-center justify-between gap-5 ${
+        recording && 'hidden'
+      }`}>
       <TouchableOpacity className="p-1" onPress={changeQuality}>
         <IconsUI
           collection="MaterialIcons"
