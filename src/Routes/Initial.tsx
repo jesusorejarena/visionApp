@@ -7,13 +7,13 @@ import Navigation from './Navigation';
 function Initial(): React.JSX.Element {
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    isLoading && setTimeout(() => setIsLoading(false), 3000);
-  }, []);
+  // useEffect(() => {
+  //   isLoading && setTimeout(() => setIsLoading(false), 3000);
+  // }, []);
 
   return (
     <SafeAreaProvider>
-      {isLoading ? <SplashScreen /> : <Navigation />}
+      {!isLoading ? <SplashScreen /> : <Navigation />}
     </SafeAreaProvider>
   );
 }

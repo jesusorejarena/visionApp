@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "ios": "react-native run-ios --interactive",
     "pods": "cd ios && bundle install && bundle exec pod install",
     "pods-intel": "cd ios && pod install",
     "m-clean": "npm cache clean --force && watchman watch-del-all && cd android && ./gradlew clean",
@@ -18,6 +18,7 @@
     "@react-native-camera-roll/camera-roll": "^7.6.0",
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/stack": "^6.3.29",
+    "axios": "^1.6.8",
     "lottie-react-native": "^6.7.2",
     "nativewind": "^2.0.11",
     "react": "18.2.0",

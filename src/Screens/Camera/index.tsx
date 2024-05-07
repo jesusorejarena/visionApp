@@ -76,6 +76,7 @@ function Camera(): React.JSX.Element {
         photoHdr={format.supportsPhotoHdr}
         // enableZoomGesture={true}
         zoom={selectZoom.value}
+        enableLocation={true}
       />
 
       <FooterUI

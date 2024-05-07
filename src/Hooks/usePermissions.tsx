@@ -2,6 +2,7 @@
 import {useEffect} from 'react';
 import {
   useCameraPermission,
+  useLocationPermission,
   useMicrophonePermission,
 } from 'react-native-vision-camera';
 
@@ -14,6 +15,10 @@ const usePermissions = () => {
     hasPermission: hasPermissionMicrophone,
     requestPermission: requestPermissionMicrophone,
   } = useMicrophonePermission();
+  const {
+    hasPermission: hasPermissionLocation,
+    requestPermission: requestPermissionLocation,
+  } = useLocationPermission();
 
   useEffect(() => {
     if (!hasPermissionCamera) {
@@ -22,6 +27,10 @@ const usePermissions = () => {
 
     if (!hasPermissionMicrophone) {
       requestPermissionMicrophone();
+    }
+
+    if (!hasPermissionLocation) {
+      requestPermissionLocation();
     }
   }, []);
 

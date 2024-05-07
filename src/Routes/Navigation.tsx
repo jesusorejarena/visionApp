@@ -4,6 +4,7 @@ import Camera from '../Screens/Camera';
 import GalleryNavigation from './GalleryNavigation';
 import RequestPermission from '../Screens/Extras/RequestPermission';
 import usePermissions from '../Hooks/usePermissions';
+import UploadImages from '../Screens/UploadImages';
 
 function Navigation(): React.JSX.Element {
   const Stack = createStackNavigator();
@@ -14,7 +15,8 @@ function Navigation(): React.JSX.Element {
 
   return (
     <Stack.Navigator
-      initialRouteName={validateNavigation ? 'Camera' : 'RequestPermission'}
+      // initialRouteName={validateNavigation ? 'Camera' : 'RequestPermission'}
+      initialRouteName={'UploadImages'}
       screenOptions={{headerShown: false}}>
       <Stack.Screen
         name="Camera"
@@ -25,6 +27,11 @@ function Navigation(): React.JSX.Element {
         name="GalleryNavigation"
         component={GalleryNavigation}
         options={{title: 'Gallery'}}
+      />
+      <Stack.Screen
+        name="UploadImages"
+        component={UploadImages}
+        options={{title: 'Upload Images', headerShown: true}}
       />
       <Stack.Screen
         name="RequestPermission"
