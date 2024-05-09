@@ -12,6 +12,10 @@ handleEventsForBackgroundURLSession:(NSString *)identifier
   [[VydiaRNFileUploader sharedInstance] setBackgroundSessionCompletionHandler:completionHandler];
 }
 
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+  [application ignoreSnapshotOnNextApplicationLaunch];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   self.moduleName = @"visionApp";

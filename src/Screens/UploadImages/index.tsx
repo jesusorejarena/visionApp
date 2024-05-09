@@ -9,6 +9,7 @@ import IconsUI from '../../Components/IconsUI';
 import {Image} from 'react-native';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 import RNBackgroundUpload from 'react-native-background-upload';
+import useBackgroundTask from '../../Hooks/useBackgroundTask';
 
 export default function UploadImages() {
   const navigation: any = useNavigation();
@@ -27,6 +28,8 @@ export default function UploadImages() {
       RNBackgroundUpload.canSuspendIfBackground();
     }
   }, [images, loadingData]);
+
+  useBackgroundTask();
 
   const getPhotos = () => {
     CameraRoll.getPhotos({
