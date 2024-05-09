@@ -1,3 +1,5 @@
+/* eslint-disable yoda */
+/* eslint-disable curly */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react';
 import {Text, View} from 'react-native';
@@ -6,12 +8,13 @@ import {useNavigation} from '@react-navigation/native';
 import IconsUI from '../../Components/IconsUI';
 import {Image} from 'react-native';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
-import axios from 'axios';
+import RNBackgroundUpload from 'react-native-background-upload';
 
 export default function UploadImages() {
   const navigation: any = useNavigation();
 
   const [images, setImages] = useState<any>({photos: []});
+  const [loadingData, setLoadingData] = useState<any>(false);
   const [status, setStatus] = useState('Pending');
   const [uploading, setUploading] = useState(false);
 
@@ -19,56 +22,125 @@ export default function UploadImages() {
     getPhotos();
   }, []);
 
+  useEffect(() => {
+    if (images.photos.length === 0 && loadingData) {
+      RNBackgroundUpload.canSuspendIfBackground();
+    }
+  }, [images, loadingData]);
+
   const getPhotos = () => {
     CameraRoll.getPhotos({
-      first: 10,
+      first: 200,
       groupTypes: 'All',
     })
       .then(r => {
         setImages({...images, photos: r.edges});
+        setLoadingData(true);
       })
-      .catch(err => {
-        console.log(err);
-        //Error Loading Images
+      .catch(() => {
+        setLoadingData(false);
       });
+  };
+
+  async function uploadFile(url: any, fileURI: any) {
+    return RNBackgroundUpload.getFileInfo(fileURI).then(
+      async (metadata: any) => {
+        const uploadOpts = Object.assign(
+          {
+            path: fileURI,
+            method: 'POST',
+            headers: {
+              'content-type': metadata.mimeType,
+            },
+          },
+          {
+            url,
+            field: 'uploaded_media',
+            type: 'multipart',
+            notification: {
+              enabled: true,
+            },
+          },
+        );
+
+        const uploadId = await RNBackgroundUpload.startUpload(uploadOpts);
+
+        return new Promise((resolve, reject) => {
+          RNBackgroundUpload.addListener('error', uploadId, reject);
+          // RNBackgroundUpload.addListener('cancelled', uploadId, () =>
+          //   reject(new Error('upload cancelled')),
+          // );
+          return RNBackgroundUpload.addListener(
+            'completed',
+            uploadId,
+            ({responseCode}: any) => {
+              if (200 <= responseCode && responseCode <= 299) {
+                resolve('success');
+              } else {
+                reject('error');
+              }
+            },
+          );
+        });
+      },
+    );
+  }
+
+  const uploadManyFilesThenPOST = async (files: any, prevFile?: any) => {
+    setStatus('Uploading');
+
+    const filesArreg = [...files];
+    const fileA = prevFile ?? filesArreg.shift();
+
+    try {
+      const value: any = await uploadFile(
+        'https://jsonplaceholder.typicode.com/posts',
+        fileA.node.image.uri,
+      );
+
+      if (value === 'success' && filesArreg.length > 0) {
+        if (filesArreg.length > 5) {
+          // Request background time. Do not call this on app suspend/resume since it might be already too late.
+          let taskId = await RNBackgroundUpload.beginBackgroundTask();
+
+          // Listen to background time is about to expire events. You can do some cleanup here. You will have about 3 to 4 seconds to run code
+          // before the app goes to sleep
+          let bgExpiredRelease = RNBackgroundUpload.addListener(
+            'bgExpired',
+            null,
+            data => {
+              if (this.working && (!taskId || data.id == taskId)) {
+                // do some cleanup
+              }
+            },
+          );
+        }
+
+        setImages({photos: filesArreg});
+
+        await uploadManyFilesThenPOST(filesArreg);
+      } else {
+        setImages({photos: filesArreg});
+      }
+    } catch (error) {
+      if (filesArreg.length > 0)
+        await uploadManyFilesThenPOST(filesArreg, fileA);
+    } finally {
+      if (filesArreg.length === 0) return filesArreg.length;
+    }
   };
 
   const handleUploadImages = async () => {
     try {
-      setUploading(true);
-
-      for (let i = 0; i < images.photos.length; i++) {
-        const image = images.photos[i];
-
-        setStatus('Uploading');
-
-        const form = new FormData();
-
-        form.append('image', {
-          uri: image.node.image.uri,
-          type: `image/${image.node.image.extension}`,
-          name: image.node.image.filename,
-        });
-
-        await axios.post(
-          'https://dummy.restapiexample.com/api/v1/create',
-          form,
-          {headers: {'Content-Type': 'multipart/form-data'}},
-        );
-
-        const filterImages = images.photos.filter(
-          (item: any) => item.node.id !== image.node.id,
-        );
-
-        setImages({photos: filterImages});
-      }
+      await uploadManyFilesThenPOST(images.photos);
     } catch (error) {
       setStatus('Error');
-      setTimeout(handleUploadImages, 5000);
     } finally {
       setUploading(false);
     }
   };
+
+  console.log(images.photos.length);
 
   return (
     <View className="flex-1 bg-white px-2 py-4">
@@ -135,35 +207,3 @@ export default function UploadImages() {
     </View>
   );
 }
-
-// {
-//          "node":{
-//             "timestamp":1715048696.789,
-//             "id":"271D762E-0EDF-4E50-9DDF-22408584C51B/L0/001",
-//             "modificationTimestamp":1715048704.514427,
-//             "image":{
-//                "uri":"ph://271D762E-0EDF-4E50-9DDF-22408584C51B/L0/001",
-//                "extension":"jpeg",
-//                "filename":"E1D621B2-C73A-460F-8C48-0218DDE7D0F5.jpeg",
-//                "width":2340,
-//                "fileSize":1139022,
-//                "playableDuration":null,
-//                "height":4160
-//             },
-//             "subTypes":[
-
-//             ],
-//             "location":{
-//                "altitude":2569.768852459016,
-//                "longitude":-74.0273555,
-//                "latitude":4.748866666666666,
-//                "heading":351.60458360232406,
-//                "speed":0
-//             },
-//             "type":"image",
-//             "sourceType":"UserLibrary",
-//             "group_name":[
-
-//             ]
-//          }
-//       },

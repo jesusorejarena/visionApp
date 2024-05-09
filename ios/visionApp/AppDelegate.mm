@@ -2,7 +2,15 @@
 
 #import <React/RCTBundleURLProvider.h>
 
+#import <VydiaRNFileUploader.h>
+
 @implementation AppDelegate
+
+- (void)application:(UIApplication *)application
+handleEventsForBackgroundURLSession:(NSString *)identifier
+  completionHandler:(void (^)(void))completionHandler {
+  [[VydiaRNFileUploader sharedInstance] setBackgroundSessionCompletionHandler:completionHandler];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
