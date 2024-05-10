@@ -4,7 +4,6 @@
 import React, {useEffect, useState} from 'react';
 import {Text, View} from 'react-native';
 import {FlatList, TouchableOpacity} from 'react-native-gesture-handler';
-import {useNavigation} from '@react-navigation/native';
 import IconsUI from '../../Components/IconsUI';
 import {Image} from 'react-native';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
@@ -12,8 +11,6 @@ import RNBackgroundUpload from 'react-native-background-upload';
 import useBackgroundTask from '../../Hooks/useBackgroundTask';
 
 export default function UploadImages() {
-  const navigation: any = useNavigation();
-
   const [images, setImages] = useState<any>({photos: []});
   const [loadingData, setLoadingData] = useState<any>(false);
   const [status, setStatus] = useState('Pending');
@@ -48,31 +45,27 @@ export default function UploadImages() {
   async function uploadFile(url: any, fileURI: any) {
     return RNBackgroundUpload.getFileInfo(fileURI).then(
       async (metadata: any) => {
-        const uploadOpts = Object.assign(
-          {
-            path: fileURI,
-            method: 'POST',
-            headers: {
-              'content-type': metadata.mimeType,
-            },
+        const uploadOpts = {
+          path: fileURI,
+          method: 'POST',
+          headers: {
+            'content-type': metadata.mimeType,
           },
-          {
-            url,
-            field: 'uploaded_media',
-            type: 'multipart',
-            notification: {
-              enabled: true,
-            },
+          url,
+          field: 'uploaded_media',
+          type: 'multipart',
+          notification: {
+            enabled: true,
           },
-        );
+        };
 
         const uploadId = await RNBackgroundUpload.startUpload(uploadOpts);
 
         return new Promise((resolve, reject) => {
           RNBackgroundUpload.addListener('error', uploadId, reject);
-          // RNBackgroundUpload.addListener('cancelled', uploadId, () =>
-          //   reject(new Error('upload cancelled')),
-          // );
+          RNBackgroundUpload.addListener('cancelled', uploadId, () =>
+            reject(new Error('upload cancelled')),
+          );
           return RNBackgroundUpload.addListener(
             'completed',
             uploadId,
@@ -97,28 +90,11 @@ export default function UploadImages() {
 
     try {
       const value: any = await uploadFile(
-        'https://jsonplaceholder.typicode.com/posts',
+        'http://localhost:3000/upload_multipart',
         fileA.node.image.uri,
       );
 
       if (value === 'success' && filesArreg.length > 0) {
-        if (filesArreg.length > 5) {
-          // Request background time. Do not call this on app suspend/resume since it might be already too late.
-          let taskId = await RNBackgroundUpload.beginBackgroundTask();
-
-          // Listen to background time is about to expire events. You can do some cleanup here. You will have about 3 to 4 seconds to run code
-          // before the app goes to sleep
-          let bgExpiredRelease = RNBackgroundUpload.addListener(
-            'bgExpired',
-            null,
-            data => {
-              if (this.working && (!taskId || data.id == taskId)) {
-                // do some cleanup
-              }
-            },
-          );
-        }
-
         setImages({photos: filesArreg});
 
         await uploadManyFilesThenPOST(filesArreg);
